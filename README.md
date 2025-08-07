@@ -1,4 +1,4 @@
-# Dexplorer ✨
+# Dexpro ✨
 *Pokédex + Explorer*
 
 [![Live Demo](https://img.shields.io/badge/Demo-Live-brightgreen.svg)](https://dexplorer-pokemon.vercel.app/)
