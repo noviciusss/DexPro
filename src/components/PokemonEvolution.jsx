@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { motion } from 'framer-motion';
-import { extractEvolutionNames } from './helpers';
+import { fetchEvolutionChain } from '../utils/api';
+import { extractEvolutionNames } from '../utils/helpers';
 
 const PokemonEvolution = ({ pokemon }) => {
   const [evolutions, setEvolutions] = useState([]);
@@ -9,21 +9,16 @@ const PokemonEvolution = ({ pokemon }) => {
 
   useEffect(() => {
     // Function to fetch the evolution chain
-    const fetchEvolutionChain = async () => {
+    const fetchEvolutionChainData = async () => {
       if (!pokemon) return;
       
       try {
         setLoading(true);
         
-        // Step 1: Get species data that contains evolution chain URL
-        const speciesResponse = await axios.get(pokemon.species.url);
-        const evolutionChainUrl = speciesResponse.data.evolution_chain.url;
+        // Use the API function to get evolution chain
+        const evolutionChain = await fetchEvolutionChain(pokemon.id);
         
-        // Step 2: Get the evolution chain data
-        const evolutionResponse = await axios.get(evolutionChainUrl);
-        const evolutionChain = evolutionResponse.data.chain;
-        
-        // Step 3: Extract evolution names from the chain
+        // Extract evolution names from the chain
         const evoNames = extractEvolutionNames(evolutionChain);
         
         setEvolutions(evoNames);
@@ -35,7 +30,7 @@ const PokemonEvolution = ({ pokemon }) => {
       }
     };
 
-    fetchEvolutionChain();
+    fetchEvolutionChainData();
   }, [pokemon]);
 
   const container = {

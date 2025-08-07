@@ -1,5 +1,5 @@
 import React from 'react';
-import { getStatColor } from './helpers';
+import { getStatColor } from '../utils/helpers';
 
 const PokemonStats = ({ stats }) => {
   return (

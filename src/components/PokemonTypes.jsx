@@ -1,5 +1,5 @@
 import React from 'react';
-import { getTypeColorClass } from './helpers';
+import { getTypeColorClass } from '../utils/helpers';
 
 const PokemonTypes = ({ types }) => {
   return (
